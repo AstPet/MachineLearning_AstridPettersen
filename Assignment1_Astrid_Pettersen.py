@@ -7,8 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 #Some sklearn-function we need for easier testing, visualisation and cleanup, not for building the model itself
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 
 
 
@@ -16,7 +15,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 "Problem 1"
 '1a)'
 #Importing the data using pandas to get a pandas dataframe containing all the data
-file_with_path = 'C:\\Users\\Astpe\\OneDrive\\UiT - Romfysikk\\7.Semester\\MachineLearning_FYS-2021\\Data\\SpotifyFeatures.csv'
+file_with_path = ''
 data_spotify = pd.read_csv(file_with_path, delimiter=',', encoding='utf-8')
 
 #Finding the number of songs and the number of features using the built in shape function and printing
@@ -56,7 +55,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, train_size=0.8, test_s
 
 
 
-'1d)'
+'1d) [Bonus]'
 #Defining the classes seperately
 Pop_data = data_genre[data_genre.iloc[:, 0] == 'Pop']
 Classical_data = data_genre[data_genre.iloc[:, 0] == 'Classical']
@@ -81,7 +80,7 @@ Plot_LivenessLoudness(Classical_data, Pop_data)
 "Problem 2"
 '2a)'
 class LogisticRegressionModel:
-    def __init__(self, learning_rate=0.01, epochs=50):
+    def __init__(self, learning_rate=0.001, epochs=10):
         self.lr = learning_rate
         self.epochs = epochs #Number of full iterations
         self.W = None #Weights
@@ -105,7 +104,7 @@ class LogisticRegressionModel:
                 Z = np.dot(self.W, X[i]) + self.B
                 Y_hat = 1 / (1 + np.exp(-Z)) #Sigmoid function
                 #Calculating error since we want to plot it
-                error_array[epoch] += -(Y[i]*np.log(Y_hat+self.epsilon) + (1-Y[i])*np.log(1-Y_hat+self.epsilon))
+                error_array[epoch] -= (Y[i]*np.log(Y_hat+self.epsilon) + (1-Y[i])*np.log(1-Y_hat+self.epsilon))
                 #Updating W and B by finding their gradients (dW and dB)
                 dW = (Y_hat - Y[i]) * X[i]
                 dB = Y_hat - Y[i]
@@ -153,7 +152,7 @@ print('The accuracy of our model on our training set is:', Training_accuracy)
 '2b)'
 #Testing my model on the test set
 Testing_accuracy = model.evaluate(X_test, Y_test)
-print('The accuracy of our model on our training set is:', Testing_accuracy)
+print('The accuracy of our model on our test set is:', Testing_accuracy)
 
 
 
