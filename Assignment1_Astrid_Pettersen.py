@@ -2,11 +2,10 @@
 "           Author: Astrid Pettersen                "
 
 #Importing necessary libaries
-#I only used this to split my data and some testing since we were not allowed to use sklearn to make the model itself
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-#Some sklearn-function we need for easier testing, visualisation and cleanup
+#Some sklearn-function we need for easier testing, visualisation and cleanup, not for building the model itself
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
